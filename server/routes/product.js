@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const product = require("../models/product");
 const { verifyTokenAndAdmin } = require("../routes/authToken");
+
+// add the new product
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
   const newProduct = new product(req.body);
   try {
@@ -51,7 +53,7 @@ router.get("/find/:id", async (req, res) => {
 
 // get all the products || new fist 5 || by category
 
-router.get("/", async(req, res) => {
+router.get("/", async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
 
