@@ -42,7 +42,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 
 // get the product
 
-router.get("/find/:id", async (req, res) => {
+router.get("/find/:id", verifyTokenAndAdmin,async (req, res) => {
   try {
     const products = await product.findById(req.params.id);
     res.status(200).send(products);
@@ -53,7 +53,7 @@ router.get("/find/:id", async (req, res) => {
 
 // get all the products || new fist 5 || by category
 
-router.get("/", async (req, res) => {
+router.get("/",verifyTokenAndAdmin, async (req, res) => {
   const qNew = req.query.new;
   const qCategory = req.query.category;
 

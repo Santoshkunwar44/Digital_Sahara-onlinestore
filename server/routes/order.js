@@ -56,7 +56,7 @@ router.get("/find/:id", verifyTokenAndAuthrization, async (req, res) => {
       .find({ userId: req.params.id })
       .populate("userId")
       .populate("products.productId");
-
+    console.log(orders);
     res.status(200).send(orders);
   } catch (err) {
     // res.status(500).send(err);
@@ -64,17 +64,16 @@ router.get("/find/:id", verifyTokenAndAuthrization, async (req, res) => {
   }
 });
 
-// get all the orders || new fist 5 || by category
+// get all the orders || new fist 5 ||
 
 router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
-    const orders = await order.find();
-
-    res
-      .status(200)
-      .send(orders)
+    const orders = await order
+      .find()
       .populate("products.productId")
       .populate("userId");
+    console.log(orders);
+    res.status(200).send(orders);
   } catch (err) {
     res.status(500).send(err);
   }
